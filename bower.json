@@ -16,5 +16,9 @@
     "www/lib",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "zeroclipboard": "~2.1.6"
+  }
 }
