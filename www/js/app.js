@@ -4,14 +4,20 @@
   var m;
   var mv;
 
-  $("#btnCreate").click(function (event) {
+  function doCreateMacaroon() {
     var location = $("#txtLocation").val();
     var identifier = $("#txtIdentifier").val();
     var secret = $("#txtSecret").val();
-    m = com.github.nitram509.jmacaroons.MacaroonsBuilder.create(location, secret, identifier);
-    $('#txtDetails').text(m.inspect());
-    $('#txtSerialized').text(m.serialize());
-    $('#copy-serialized').attr('data-clipboard-text', m.serialize()).show("fast");
+    if (location && identifier && secret) {
+      m = com.github.nitram509.jmacaroons.MacaroonsBuilder.create(location, secret, identifier);
+      $('#txtDetails').text(m.inspect());
+      $('#txtSerialized').text(m.serialize());
+      $('#copy-serialized').attr('data-clipboard-text', m.serialize()).show("fast");
+    }
+  }
+
+  $("#btnCreate").click(function (event) {
+    doCreateMacaroon();
   });
 
   $("#btnAddCaveat").click(function (event) {
@@ -25,13 +31,21 @@
     }
   });
 
-  $("#btnDeSerialize").click(function (event) {
+  function doDeSerialize() {
     var serialized = $('#txtSerialized_verify').val();
     mv = com.github.nitram509.jmacaroons.MacaroonsBuilder.deserialize(serialized);
     $('#txtDetails_verify').text(mv.inspect());
+  }
+
+  $("#btnDeSerialize").click(function (event) {
+    doDeSerialize();
   });
 
-  $("#btnVerify").click(function (event) {
+  $('#txtSerialized_verify').on('input propertychange', function (event) {
+    doDeSerialize();
+  });
+
+  function doVerifyAndUpdateUI() {
     if (mv) {
       var secret = $("#txtSecret_verify").val();
       var v = new com.github.nitram509.jmacaroons.MacaroonsVerifier(mv);
@@ -43,6 +57,14 @@
         $("#imgNotOk").show('fast');
       }
     }
+  }
+
+  $("#btnVerify").click(function (event) {
+    doVerifyAndUpdateUI();
+  });
+
+  $("#txtSecret_verify").on('input propertychange', function (event) {
+    doVerifyAndUpdateUI();
   });
 
   var serializedClipboard = new ZeroClipboard(document.getElementById("copy-serialized"));
@@ -65,8 +87,9 @@
     }
   }
 
-  $("#txtLocation").on('keypress', enableCreateButton).on('change', enableCreateButton);
-  $("#txtIdentifier").on('keypress', enableCreateButton).on('change', enableCreateButton);
-  $("#txtSecret").on('keypress', enableCreateButton).on('change', enableCreateButton);
+  $('#txtLocation,#txtIdentifier,#txtSecret').on('input propertychange', function (event) {
+    enableCreateButton(event);
+    doCreateMacaroon();
+  });
 
 })();
