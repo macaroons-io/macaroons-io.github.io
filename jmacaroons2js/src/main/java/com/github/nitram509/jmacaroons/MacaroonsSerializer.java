@@ -18,7 +18,6 @@ package com.github.nitram509.jmacaroons;
 
 import com.github.nitram509.jmacaroons.util.Base64;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ class MacaroonsSerializer {
       packets.add(serialize_packet(caveatPacket.type, caveatPacket.value));
     }
     packets.add(serialize_packet(Type.signature, macaroon.signatureBytes));
-    return Base64.encodeToString(flattenByteArray(packets), false);
+    return Base64.encodeUrlSafeToString(flattenByteArray(packets));
   }
 
   private static byte[] serialize_packet(Type type, String data) {

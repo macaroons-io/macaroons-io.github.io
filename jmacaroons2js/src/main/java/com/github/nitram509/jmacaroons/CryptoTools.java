@@ -68,7 +68,7 @@ class CryptoTools {
     byte[] vid = new byte[VID_NONCE_KEY_SZ];
     System.arraycopy(enc_nonce, 0, vid, 0, MACAROON_SECRET_NONCE_BYTES);
     System.arraycopy(enc_ciphertext, MACAROON_SECRET_BOX_ZERO_BYTES, vid, MACAROON_SECRET_NONCE_BYTES, VID_NONCE_KEY_SZ - MACAROON_SECRET_NONCE_BYTES);
-    byte[] vidAsBase64 = Base64.encodeToByte(vid, 0, VID_NONCE_KEY_SZ, false);
+    byte[] vidAsBase64 = Base64.encodeUrlSafeToString(vid).getBytes();
 
     byte[] hashNew = macaroon_hash2(hash, vidAsBase64, getBytes(identifier));
     return new ThirdPartyPacket(hashNew, asString(vidAsBase64));
