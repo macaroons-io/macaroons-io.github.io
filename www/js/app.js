@@ -36,9 +36,11 @@
       var secret = $("#txtSecret_verify").val();
       var v = new com.github.nitram509.jmacaroons.MacaroonsVerifier(mv);
       if (v.isValid(secret)) {
-        $("#imgVerified").show('fast')
+        $("#imgVerified").show('fast');
+        $("#imgNotOk").hide('fast');
       } else {
-        $("#imgVerified").hide('fast')
+        $("#imgVerified").hide('fast');
+        $("#imgNotOk").show('fast');
       }
     }
   });

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="Layer_2"
+    version="1.1"
+    xml:space="preserve"
+    viewBox="0 0 42 42"
+    enable-background="new 0 0 42 42"
+    y="0px"
+    x="0px"
+  >
+<circle
+      cy="21"
+      cx="21"
+      r="20"
+      fill="#FFF6F5"
+  />
+<linearGradient
+      id="SVGID_1_"
+      y2="41"
+      gradientUnits="userSpaceOnUse"
+      y1="1"
+      x2="21"
+      x1="21"
+    >
+	<stop
+        stop-color="#C91D00"
+        offset="0"
+    />
+	<stop
+        stop-color="#810F00"
+        offset="1"
+    />
+</linearGradient
+  >
+<path
+      d="m21 5c9.378 0 16 6.633 16 16 0 9.366-6.622 16-16 16-9.377 0-16-6.634-16-16 0-9.367 6.623-16 16-16m0-4c-11.046 0-20 8.954-20 20 0 11.045 8.954 20 20 20 11.045 0 20-8.955 20-20 0-11.046-8.955-20-20-20z"
+      fill="url(#SVGID_1_)"
+  />
+<path
+      d="m27 23c0 0.553-0.447 1-1 1h-10c-0.552 0-1-0.447-1-1v-4c0-0.552 0.448-1 1-1h10c0.553 0 1 0.448 1 1v4z"
+      fill="#DB3A3E"
+  />
+<metadata
+    ><rdf:RDF
+      ><cc:Work
+        ><dc:format
+          >image/svg+xml</dc:format
+        ><dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        /><cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        /><dc:publisher
+          ><cc:Agent
+              rdf:about="http://openclipart.org/"
+            ><dc:title
+              >Openclipart</dc:title
+            ></cc:Agent
+          ></dc:publisher
+        ><dc:title
+          >dwcheckno - "incomplete"</dc:title
+        ><dc:date
+          >2013-04-30T15:48:56</dc:date
+        ><dc:description
+          >icon, red, denied, no, error, minus, wrong</dc:description
+        ><dc:source
+          >https://openclipart.org/detail/177570/dwcheckno---incomplete-by-forest51690-177570</dc:source
+        ><dc:creator
+          ><cc:Agent
+            ><dc:title
+              >forest51690</dc:title
+            ></cc:Agent
+          ></dc:creator
+        ><dc:subject
+          ><rdf:Bag
+            ><rdf:li
+              >denied</rdf:li
+            ><rdf:li
+              >error</rdf:li
+            ><rdf:li
+              >icon</rdf:li
+            ><rdf:li
+              >minus</rdf:li
+            ><rdf:li
+              >no</rdf:li
+            ><rdf:li
+              >red</rdf:li
+            ><rdf:li
+              >wrong</rdf:li
+            ></rdf:Bag
+          ></dc:subject
+        ></cc:Work
+      ><cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        ><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        /><cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        /></cc:License
+      ></rdf:RDF
+    ></metadata
+  ></svg
+>
