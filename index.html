@@ -36,40 +36,8 @@
 
       <a name="build"><h1>Build</h1></a>
 
-      <h5>Basic input data</h5>
-
-      <div>
-        <table border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <th><label class="small" for="txtLocation">Location</label></th>
-            <th><label class="small" for="txtIdentifier">Identifier</label></th>
-            <th><label class="small" for="txtSecret">Secret</label></th>
-          </tr>
-          <tr id="build-input">
-            <td><input type="text" id="txtLocation" placeholder="http://www.example.org"></td>
-            <td><input type="text" id="txtIdentifier" placeholder="public identifier 0815"></td>
-            <td><input type="text" id="txtSecret" placeholder="your private secret"></td>
-          </tr>
-          <tr>
-            <td colspan="2" style="text-align: left"></td>
-            <td colspan="1" style="text-align: left">
-              <button id="btnCreate" type="button" disabled="disabled">Create</button>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <h5>Macaroon technical details</h5>
-
-      <div id="build-macaroon-details">
-        <textarea id="txtDetails" style="width: 100%" rows="10" readonly="readonly"></textarea>
-      </div>
-
-      <h5>Macaroon serialized</h5>
-
-      <div>
-        <textarea id="txtSerialized" style="width: 100%" rows="2" readonly="readonly"></textarea>
-        <button id="copy-serialized" data-clipboard-text="" title="Click to copy me." style="display: none;">Copy to Clipboard</button>
+      <div id="view-build">
+        <!-- will be managed by app logic -->
       </div>
 
       <p><br></p>

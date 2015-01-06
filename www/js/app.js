@@ -3,50 +3,94 @@ var app = {};
 (function () {
   "use strict";
 
-  app.build = {};
-  app.build.macaroon = m.prop(null);
+  //app.build = {};
+  //app.build.macaroon = m.prop(null);
 
   app.controller = function () {
     app.vm.init();
   };
 
-  app.view = function (ctrl) {
+  app.view = {};
+  app.view.build = function (ctrl) {
     var vm = app.vm;
     return [
-      m("td", [
-        m("input[type=text]", {
-          placeholder: 'http://www.example.org',
-          onchange: app.vm.updateAndMacaroon.bind(app.vm, m.withAttr("value", app.vm.location)),
-          value: app.vm.location()
-        })]),
-      m("td", [
-        m("input[type=text]", {
-          placeholder: 'public identifier 0815',
-          onchange: app.vm.updateAndMacaroon.bind(app.vm, m.withAttr("value", app.vm.identifier)),
-          value: app.vm.identifier()
-        })]),
-      m("td", [
-        m("input[type=text]", {
-          placeholder: 'your private secret',
-          onchange: app.vm.updateAndMacaroon.bind(app.vm, m.withAttr("value", app.vm.secret)),
-          value: app.vm.secret()
-        })
+      m("h5", "Basic input data"),
+      m("div", [
+        m("table", {"border": "0", "cellpadding": "0", "cellspacing": "0"}, [
+          m("tr", [
+            m("th", {"class": "small"}, "Location"),
+            m("th", {"class": "small"}, "Identifier"),
+            m("th", {"class": "small"}, "Secret")
+          ]),
+          m("tr", [
+            m("td", [
+              m("input[type=text]", {
+                placeholder: 'http://www.example.org',
+                onchange: vm.updateAndMacaroon.bind(vm, m.withAttr("value", vm.location)),
+                value: vm.location()
+              })]),
+            m("td", [
+              m("input[type=text]", {
+                placeholder: 'public identifier 0815',
+                onchange: vm.updateAndMacaroon.bind(vm, m.withAttr("value", vm.identifier)),
+                value: vm.identifier()
+              })]),
+            m("td", [
+              m("input[type=text]", {
+                placeholder: 'your private secret',
+                onchange: vm.updateAndMacaroon.bind(vm, m.withAttr("value", vm.secret)),
+                value: vm.secret()
+              })
+            ])
+          ]),
+          m("tr", [
+            m("td", {"colspan": "2"}),
+            m("td", {"colspan": "1", "style": "text-align:left"}, [
+              m("button", {
+                onclick: vm.updateMacaroon.bind(vm),
+                type: "button",
+                disabled: (vm.btn_create_disabled() ? "disabled" : null)
+              }, "Create")
+            ])
+          ])
+        ])
+      ]),
+      m("h5", "Macaroon technical details"),
+      m("div", [
+        m("textarea", {"style": "width: 100%", "rows": "10", "readonly": "readonly"}, vm.macaroon_details())
+      ]),
+      m("h5", "Macaroon serialized"),
+      m("div", [
+        m("textarea", {"style": "width: 100%", "rows": "2", "readonly": "readonly"}, vm.macaroon_serialized()),
+        m("button", {
+          "data-clipboard-text": "",
+          "title": "Click to copy me.",
+          "style": "display: none;",
+          "rows": "10",
+          "readonly": "readonly"
+        }, "Copy to Clipboard")
       ])
     ];
   };
 
   app.vm = (function () {
     var vm = {};
-    vm.updateMacaroon = function() {
-      if (vm.identifier() && vm.secret() && vm.location()) {
+    vm.updateMacaroon = function () {
+      var create = vm.identifier() && vm.secret() && vm.location();
+      vm.btn_create_disabled(!create);
+      if (create) {
         var macaroon = com.github.nitram509.jmacaroons.MacaroonsBuilder.create(vm.location(), vm.secret(), vm.identifier());
-        app.build.macaroon(macaroon);
+        vm.macaroon_details(macaroon.inspect());
+        vm.macaroon_serialized(macaroon.serialize());
       }
     };
     vm.init = function () {
       vm.location = m.prop(null);
       vm.identifier = m.prop(null);
       vm.secret = m.prop(null);
+      vm.macaroon_details = m.prop(null);
+      vm.macaroon_serialized = m.prop(null);
+      vm.btn_create_disabled = m.prop(true);
       vm.updateAndMacaroon = function (propertyBindingFn) {
         propertyBindingFn();
         vm.updateMacaroon();
@@ -55,9 +99,8 @@ var app = {};
     return vm;
   }());
 
-  var buildinput = document.getElementById("build-input");
-
-  m.module(buildinput, {controller: app.controller, view: app.view});
+  var view_build = document.getElementById("view-build");
+  m.module(view_build, {controller: app.controller, view: app.view.build});
 
   //var m;
   //var mv;
