@@ -14,6 +14,9 @@ var app = {};
   app.view.build = function (ctrl) {
     var vm = app.vm;
     return [
+      m("a", {name: "build"}, [
+        m("h1", "Build")
+      ]),
       m("h5", "Basic input data"),
       m("div", [
         m("table", {"border": "0", "cellpadding": "0", "cellspacing": "0"}, [
@@ -61,7 +64,7 @@ var app = {};
       ]),
       m("h5", "Macaroon serialized"),
       m("div", [
-        m("textarea", {"style": "width: 100%", "rows": "2", "readonly": "readonly"}, vm.macaroon_serialized()),
+        m("textarea", {"style": "width: 100%", "rows": "2", "readonly": "readonly", onchange:m.withAttr("value", vm.macaroon_serialized)}, vm.macaroon_serialized()),
         m("button", {
           "data-clipboard-text": "",
           "title": "Click to copy me.",
@@ -71,6 +74,44 @@ var app = {};
         }, "Copy to Clipboard")
       ])
     ];
+  };
+
+  app.view.verify = function (ctrl) {
+    var vm = app.vm.verify;
+    return [
+      m("a", {name: "verify"}, [
+        m("h1", "Verify")
+      ]),
+      m("h5", "Input Macaroon"),
+      m("div", [
+        m("textarea", {
+          "style": "width: 100%",
+          "rows": "2",
+          "placeholder": "Add your serialized macaroon here ..."
+        }, vm.macaroon_serialized()),
+        m("button", {onclick: vm.doDeSerialize}, "Deserialize")
+      ]),
+      m("h5", "Macaroon technical details"),
+      m("div", [
+        m("textarea", {"style": "width: 100%", "rows": "10", "readonly": "readonly"}, vm.macaroon_serialized()),
+        m("input[type=text]", {
+          placeholder: 'your private secret',
+          onchange: m.withAttr("value", vm.secret),
+          value: vm.secret()
+        }),
+        m("button", {onclick: vm.doVerify}, "Verify"),
+        m("img", {
+          src: "www/img/dwcheckyes.png",
+          alt: "Verified OK",
+          style: "position: relative; top:-75px; float: right; display: none"
+        }),
+        m("img", {
+          src: "www/img/dwcheckno.png",
+          alt: "Verified BAD",
+          style: "position: relative; top:-75px; float: right; display: none"
+        })
+      ])
+    ]
   };
 
   app.vm = (function () {
@@ -94,6 +135,17 @@ var app = {};
       vm.updateAndMacaroon = function (propertyBindingFn) {
         propertyBindingFn();
         vm.updateMacaroon();
+      };
+
+      vm.verify = {};
+      vm.verify.secret = m.prop(null);
+      vm.verify.macaroon_serialized = m.prop(null);
+      vm.verify.macaroon_details = m.prop(null);
+      vm.verify.doDeSerialize = function () {
+        console.log("doDeSerialize");
+      };
+      vm.verify.doVerify = function () {
+        console.log("verify");
       }
     };
     return vm;
@@ -101,6 +153,9 @@ var app = {};
 
   var view_build = document.getElementById("view-build");
   m.module(view_build, {controller: app.controller, view: app.view.build});
+
+  var view_verify = document.getElementById("view-verify");
+  m.module(view_verify, {controller: app.controller, view: app.view.verify});
 
   //var m;
   //var mv;
